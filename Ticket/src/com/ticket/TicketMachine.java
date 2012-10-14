@@ -44,6 +44,7 @@ public class TicketMachine extends javax.swing.JFrame {
         jButtonAdd = new javax.swing.JButton();
         jButtonEmitir = new javax.swing.JButton();
         jButtonTroca = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -60,9 +61,9 @@ public class TicketMachine extends javax.swing.JFrame {
         jLabelVALOR.setText("Valor");
 
         jLabelSaldo.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabelSaldo.setText("valor");
+        jLabelSaldo.setText("191");
 
-        jButtonAdd.setText("ADD");
+        jButtonAdd.setText("Inserir");
         jButtonAdd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonAddActionPerformed(evt);
@@ -71,46 +72,56 @@ public class TicketMachine extends javax.swing.JFrame {
 
         jButtonEmitir.setText("Emitir");
 
-        jButtonTroca.setText("Troca");
+        jButtonTroca.setText("Troco");
+        jButtonTroca.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonTrocaActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel1.setText("R$");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(35, 35, 35)
+                        .addGap(41, 41, 41)
                         .addComponent(jButtonEmitir)
                         .addGap(18, 18, 18)
                         .addComponent(jButtonTroca)
-                        .addGap(0, 0, Short.MAX_VALUE))
+                        .addGap(0, 61, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(0, 54, Short.MAX_VALUE)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabelSALDO)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(47, 47, 47)
-                                        .addComponent(jLabelSaldo))))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabelVALOR)
-                                .addGap(16, 16, 16)
-                                .addComponent(jTextFieldValor)))
                         .addGap(18, 18, 18)
+                        .addComponent(jLabelVALOR)
+                        .addGap(16, 16, 16)
+                        .addComponent(jTextFieldValor)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButtonAdd)))
                 .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabelSALDO)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabelSaldo)))
+                .addGap(72, 72, 72))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
                 .addComponent(jLabelSALDO)
                 .addGap(18, 18, 18)
-                .addComponent(jLabelSaldo)
-                .addGap(42, 42, 42)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelSaldo)
+                    .addComponent(jLabel1))
+                .addGap(48, 48, 48)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextFieldValor, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabelVALOR)
@@ -131,14 +142,19 @@ public class TicketMachine extends javax.swing.JFrame {
 
     private void jButtonAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddActionPerformed
         // TODO add your handling code here:
-        if( Integer.parseInt(jLabelSaldo.getText()) > 0 )
+       
+    }//GEN-LAST:event_jButtonAddActionPerformed
+
+    private void jButtonTrocaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonTrocaActionPerformed
+        // TODO add your handling code here:
+         if( Integer.parseInt(jLabelSaldo.getText()) > 0 )
         {
-            jLabelSaldo.setText("0,00");
+            jLabelSaldo.setText(Integer.toString(0,00));
         }
         else{
             JOptionPane.showMessageDialog(this, "Sem Saldo", "Voce esta sem saldo", JOptionPane.ERROR_MESSAGE);
         }
-    }//GEN-LAST:event_jButtonAddActionPerformed
+    }//GEN-LAST:event_jButtonTrocaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -178,6 +194,7 @@ public class TicketMachine extends javax.swing.JFrame {
     private javax.swing.JButton jButtonAdd;
     private javax.swing.JButton jButtonEmitir;
     private javax.swing.JButton jButtonTroca;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabelSALDO;
     private javax.swing.JLabel jLabelSaldo;
     private javax.swing.JLabel jLabelVALOR;
