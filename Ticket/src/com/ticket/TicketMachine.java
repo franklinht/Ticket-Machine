@@ -4,17 +4,28 @@
  */
 package com.ticket;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Alice
  */
-public class MainJFrame extends javax.swing.JFrame {
+public class TicketMachine extends javax.swing.JFrame {
 
     /**
-     * Creates new form MainJFrame
+     * Creates new form TicketMachine
      */
-    public MainJFrame() {
+    public TicketMachine() {
         initComponents();
+    }
+    
+    //valor inicial do saldo
+    private int saldo;
+    public void setSaldo(int newSaldo){
+        saldo = newSaldo;
+    }
+    public int getSaldo(){
+        return saldo;
     }
 
     /**
@@ -120,6 +131,13 @@ public class MainJFrame extends javax.swing.JFrame {
 
     private void jButtonAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddActionPerformed
         // TODO add your handling code here:
+        if( Integer.parseInt(jLabelSaldo.getText()) > 0 )
+        {
+            jLabelSaldo.setText("0,00");
+        }
+        else{
+            JOptionPane.showMessageDialog(this, "Sem Saldo", "Voce esta sem saldo", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_jButtonAddActionPerformed
 
     /**
@@ -139,20 +157,20 @@ public class MainJFrame extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(MainJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TicketMachine.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(MainJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TicketMachine.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(MainJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TicketMachine.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(MainJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TicketMachine.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MainJFrame().setVisible(true);
+                new TicketMachine().setVisible(true);
             }
         });
     }
