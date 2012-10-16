@@ -4,7 +4,11 @@
  */
 package com.ticket;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.JDialog;
 import javax.swing.JOptionPane;
+import javax.swing.Timer;
 
 /**
  *
@@ -143,13 +147,29 @@ public class TicketMachine extends javax.swing.JFrame {
     private void jButtonAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddActionPerformed
         // TODO add your handling code here:
         
+        JOptionPane pane = new JOptionPane ("Por favor aguarde um instante...");   
+        final JDialog dialog = pane.createDialog(null, "Dispose");   
+        Timer timer = new Timer(3000,new ActionListener() {   
+                   public void actionPerformed(ActionEvent evt) {   
+                       dialog.dispose();   
+                   }   
+        });
+       timer.setRepeats(false);   
+       timer.start();   
+       dialog.show();   
+       timer.stop();  
+        
         //TESTE: O software recebe valores negativos
-        if(jTextFieldValor.getText().equals("")){
+        if(jTextFieldValor.getText().equals(""))
+        {
             
-        }else{
-        int aux = Integer.parseInt(jLabelSaldo.getText());
-        jLabelSaldo.setText( Integer.toString(aux + Integer.parseInt(jTextFieldValor.getText())) );
-        jTextFieldValor.setText("");
+        }
+        else
+        {
+            int aux = Integer.parseInt(jLabelSaldo.getText());
+            jLabelSaldo.setText( Integer.toString(aux + Integer.parseInt(jTextFieldValor.getText())) );
+            jTextFieldValor.setText("");
+            JOptionPane.showMessageDialog(null, "Nota/Moeda aceita com sucesso!");
         }
     }//GEN-LAST:event_jButtonAddActionPerformed
 
