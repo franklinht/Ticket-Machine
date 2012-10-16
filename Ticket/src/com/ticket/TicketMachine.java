@@ -142,7 +142,15 @@ public class TicketMachine extends javax.swing.JFrame {
 
     private void jButtonAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddActionPerformed
         // TODO add your handling code here:
-       
+        
+        //TESTE: O software recebe valores negativos
+        if(jTextFieldValor.getText().equals("")){
+            
+        }else{
+        int aux = Integer.parseInt(jLabelSaldo.getText());
+        jLabelSaldo.setText( Integer.toString(aux + Integer.parseInt(jTextFieldValor.getText())) );
+        jTextFieldValor.setText("");
+        }
     }//GEN-LAST:event_jButtonAddActionPerformed
 
     private void jButtonTrocaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonTrocaActionPerformed
