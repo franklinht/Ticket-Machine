@@ -166,10 +166,15 @@ public class TicketMachine extends javax.swing.JFrame {
         }
         else
         {
-            int aux = Integer.parseInt(jLabelSaldo.getText());
-            jLabelSaldo.setText( Integer.toString(aux + Integer.parseInt(jTextFieldValor.getText())) );
-            jTextFieldValor.setText("");
-            JOptionPane.showMessageDialog(null, "Nota/Moeda aceita com sucesso!");
+            try{
+                int aux = Integer.parseInt(jLabelSaldo.getText());
+                jLabelSaldo.setText( Integer.toString(aux + Integer.parseInt(jTextFieldValor.getText())) );
+                jTextFieldValor.setText("");
+                JOptionPane.showMessageDialog(null, "Nota/Moeda aceita com sucesso!");
+            }catch(Exception e)
+            {
+                JOptionPane.showMessageDialog(null, "Nota/Moeda não aceita.");
+            }
         }
     }//GEN-LAST:event_jButtonAddActionPerformed
 
