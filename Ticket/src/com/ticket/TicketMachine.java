@@ -146,26 +146,26 @@ public class TicketMachine extends javax.swing.JFrame {
 
     private void jButtonAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddActionPerformed
         // TODO add your handling code here:
-        
-        JOptionPane pane = new JOptionPane ("Por favor aguarde um instante...");   
-        final JDialog dialog = pane.createDialog(null, "Dispose");   
-        Timer timer = new Timer(3000,new ActionListener() {   
-                   public void actionPerformed(ActionEvent evt) {   
-                       dialog.dispose();   
-                   }   
-        });
-       timer.setRepeats(false);   
-       timer.start();   
-       dialog.show();   
-       timer.stop();  
-        
-        //TESTE: O software recebe valores negativos
         if(jTextFieldValor.getText().equals(""))
         {
-            
+            JOptionPane.showMessageDialog(null, "Por favor insira uma Nota/Moeda para realizar a operação");
         }
         else
         {
+        
+            JOptionPane pane = new JOptionPane ("Por favor aguarde um instante...");   
+            final JDialog dialog = pane.createDialog(null, "Dispose");   
+            Timer timer = new Timer(3000,new ActionListener() {   
+                       public void actionPerformed(ActionEvent evt) {   
+                           dialog.dispose();   
+                       }   
+            });
+           timer.setRepeats(false);   
+           timer.start();   
+           dialog.show();   
+           timer.stop();  
+
+            //TESTE: O software recebe valores negativos
             try{
                 int aux = Integer.parseInt(jLabelSaldo.getText());
                 jLabelSaldo.setText( Integer.toString(aux + Integer.parseInt(jTextFieldValor.getText())) );
@@ -175,6 +175,7 @@ public class TicketMachine extends javax.swing.JFrame {
             {
                 JOptionPane.showMessageDialog(null, "Nota/Moeda não aceita.");
             }
+            
         }
     }//GEN-LAST:event_jButtonAddActionPerformed
 
