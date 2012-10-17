@@ -200,21 +200,21 @@ public class TicketMachine extends javax.swing.JFrame {
         int VALORPASSAGEM = 3;
         int qtdTickets = 0;
 
-        JOptionPane pane = new JOptionPane("Valor do ticket: " + VALORPASSAGEM + ",00");
-        final JDialog dialog = pane.createDialog(null, "Preco Ticket");
-        Timer timer = new Timer(3000, new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
-                dialog.dispose();
-            }
-        });
-        timer.setRepeats(false);
-        timer.start();
-        dialog.show();
-        timer.stop();
-
         if (Integer.parseInt(jLabelSaldo.getText()) < 3) {
             JOptionPane.showMessageDialog(null, "Voce deve colocar mais dinheiro, o Ticket custa R$ " + Integer.toString(VALORPASSAGEM) + ",00 e voce possui: R$ " + Integer.parseInt(jLabelSaldo.getText()) + ",00");
         } else {
+            JOptionPane pane = new JOptionPane("Valor do ticket: " + VALORPASSAGEM + ",00");
+            final JDialog dialog = pane.createDialog(null, "Preco Ticket");
+            Timer timer = new Timer(3000, new ActionListener() {
+                public void actionPerformed(ActionEvent evt) {
+                    dialog.dispose();
+                }
+            });
+            timer.setRepeats(false);
+            timer.start();
+            dialog.show();
+            timer.stop();
+            
             int valorLabel = Integer.parseInt(jLabelSaldo.getText());
             int resto = valorLabel % 3;
 
