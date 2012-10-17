@@ -22,13 +22,14 @@ public class TicketMachine extends javax.swing.JFrame {
     public TicketMachine() {
         initComponents();
     }
-    
     //valor inicial do saldo
     private int saldo;
-    public void setSaldo(int newSaldo){
+
+    public void setSaldo(int newSaldo) {
         saldo = newSaldo;
     }
-    public int getSaldo(){
+
+    public int getSaldo() {
         return saldo;
     }
 
@@ -47,7 +48,7 @@ public class TicketMachine extends javax.swing.JFrame {
         jLabelSaldo = new javax.swing.JLabel();
         jButtonAdd = new javax.swing.JButton();
         jButtonEmitir = new javax.swing.JButton();
-        jButtonTroca = new javax.swing.JButton();
+        jButtonTroco = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -65,7 +66,7 @@ public class TicketMachine extends javax.swing.JFrame {
         jLabelVALOR.setText("Valor");
 
         jLabelSaldo.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabelSaldo.setText("191");
+        jLabelSaldo.setText("0");
 
         jButtonAdd.setText("Inserir");
         jButtonAdd.addActionListener(new java.awt.event.ActionListener() {
@@ -75,11 +76,16 @@ public class TicketMachine extends javax.swing.JFrame {
         });
 
         jButtonEmitir.setText("Emitir");
-
-        jButtonTroca.setText("Troco");
-        jButtonTroca.addActionListener(new java.awt.event.ActionListener() {
+        jButtonEmitir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonTrocaActionPerformed(evt);
+                jButtonEmitirActionPerformed(evt);
+            }
+        });
+
+        jButtonTroco.setText("Troco");
+        jButtonTroco.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonTrocoActionPerformed(evt);
             }
         });
 
@@ -96,7 +102,7 @@ public class TicketMachine extends javax.swing.JFrame {
                         .addGap(41, 41, 41)
                         .addComponent(jButtonEmitir)
                         .addGap(18, 18, 18)
-                        .addComponent(jButtonTroca)
+                        .addComponent(jButtonTroco)
                         .addGap(0, 61, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(18, 18, 18)
@@ -132,7 +138,7 @@ public class TicketMachine extends javax.swing.JFrame {
                     .addComponent(jButtonAdd))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButtonTroca)
+                    .addComponent(jButtonTroco)
                     .addComponent(jButtonEmitir))
                 .addGap(28, 28, 28))
         );
@@ -145,50 +151,78 @@ public class TicketMachine extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextFieldValorActionPerformed
 
     private void jButtonAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddActionPerformed
-        // TODO add your handling code here:
-        if(jTextFieldValor.getText().equals(""))
-        {
-            JOptionPane.showMessageDialog(null, "Por favor insira uma Nota/Moeda para realizar a operação");
-        }
-        else
-        {
-        
-            JOptionPane pane = new JOptionPane ("Por favor aguarde um instante...");   
-            final JDialog dialog = pane.createDialog(null, "Dispose");   
-            Timer timer = new Timer(3000,new ActionListener() {   
-                       public void actionPerformed(ActionEvent evt) {   
-                           dialog.dispose();   
-                       }   
-            });
-           timer.setRepeats(false);   
-           timer.start();   
-           dialog.show();   
-           timer.stop();  
 
-            //TESTE: O software recebe valores negativos
-            try{
-                int aux = Integer.parseInt(jLabelSaldo.getText());
-                jLabelSaldo.setText( Integer.toString(aux + Integer.parseInt(jTextFieldValor.getText())) );
-                jTextFieldValor.setText("");
-                JOptionPane.showMessageDialog(null, "Nota/Moeda aceita com sucesso!");
-            }catch(Exception e)
-            {
+        if (jTextFieldValor.getText().equals("") || jTextFieldValor.getText() == null) {
+            JOptionPane.showMessageDialog(null, "Por favor insira uma Nota/Moeda para realizar a operação");
+        } else {
+            try {
+                int valorInserir = Integer.parseInt(jTextFieldValor.getText());
+                if (valorInserir < 0) {
+                    JOptionPane.showMessageDialog(null, "Nota/Moeda não aceita.");;
+                } else {
+                    JOptionPane pane = new JOptionPane("Por favor aguarde um instante...");
+                    final JDialog dialog = pane.createDialog(null, "Dispose");
+                    Timer timer = new Timer(3000, new ActionListener() {
+                        public void actionPerformed(ActionEvent evt) {
+                            dialog.dispose();
+                        }
+                    });
+                    timer.setRepeats(false);
+                    timer.start();
+                    dialog.show();
+                    timer.stop();
+
+                    //TESTE: O software recebe valores negativos
+
+                    int aux = Integer.parseInt(jLabelSaldo.getText());
+                    jLabelSaldo.setText(Integer.toString(aux + valorInserir));
+                    jTextFieldValor.setText("");
+                    JOptionPane.showMessageDialog(null, "Nota/Moeda aceita com sucesso!");
+                }
+            } catch (Exception e) {
                 JOptionPane.showMessageDialog(null, "Nota/Moeda não aceita.");
             }
-            
+
         }
     }//GEN-LAST:event_jButtonAddActionPerformed
 
-    private void jButtonTrocaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonTrocaActionPerformed
+    private void jButtonTrocoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonTrocoActionPerformed
         // TODO add your handling code here:
-         if( Integer.parseInt(jLabelSaldo.getText()) > 0 )
-        {
-            jLabelSaldo.setText(Integer.toString(0,00));
-        }
-        else{
+        if (Integer.parseInt(jLabelSaldo.getText()) > 0) {
+            JOptionPane.showMessageDialog(null, "Voce resgatou R$ "+jLabelSaldo.getText()+",00");
+            jLabelSaldo.setText(Integer.toString(0, 00));
+        } else {
             JOptionPane.showMessageDialog(this, "Sem Saldo", "Voce esta sem saldo", JOptionPane.ERROR_MESSAGE);
         }
-    }//GEN-LAST:event_jButtonTrocaActionPerformed
+    }//GEN-LAST:event_jButtonTrocoActionPerformed
+
+    private void jButtonEmitirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEmitirActionPerformed
+        int VALORPASSAGEM = 3;
+        int qtdTickets = 0;
+
+        JOptionPane pane = new JOptionPane("Valor do ticket: " + VALORPASSAGEM + ",00");
+        final JDialog dialog = pane.createDialog(null, "Preco Ticket");
+        Timer timer = new Timer(3000, new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                dialog.dispose();
+            }
+        });
+        timer.setRepeats(false);
+        timer.start();
+        dialog.show();
+        timer.stop();
+
+        if (Integer.parseInt(jLabelSaldo.getText()) < 3) {
+            JOptionPane.showMessageDialog(null, "Voce deve colocar mais dinheiro, o Ticket custa R$ " + Integer.toString(VALORPASSAGEM) + ",00 e voce possui: R$ " + Integer.parseInt(jLabelSaldo.getText()) + ",00");
+        } else {
+            int valorLabel = Integer.parseInt(jLabelSaldo.getText());
+            int resto = valorLabel % 3;
+
+            qtdTickets = (valorLabel - resto) / 3;
+            JOptionPane.showMessageDialog(null, "Emitiu-se " + qtdTickets + (qtdTickets > 1 ? " Tickets" : " Ticket"));
+            jLabelSaldo.setText(Integer.toString(resto));
+        }
+    }//GEN-LAST:event_jButtonEmitirActionPerformed
 
     /**
      * @param args the command line arguments
@@ -227,7 +261,7 @@ public class TicketMachine extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonAdd;
     private javax.swing.JButton jButtonEmitir;
-    private javax.swing.JButton jButtonTroca;
+    private javax.swing.JButton jButtonTroco;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabelSALDO;
     private javax.swing.JLabel jLabelSaldo;
